@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Animation</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        canvas {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="animationCanvas" width="500" height="500"></canvas>
+    <script>
+        const canvas = document.getElementById('animationCanvas');
+        const ctx = canvas.getContext('2d');
+        let x = 50, y = 50, dx = 2, dy = 2, radius = 20;
+
+        function drawBall() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'blue';
+            ctx.fill();
+            ctx.closePath();
+
+            if (x + dx > canvas.width - radius || x + dx < radius) dx = -dx;
+            if (y + dy > canvas.height - radius || y + dy < radius) dy = -dy;
+
+            x += dx;
+            y += dy;
+        }
+
+        setInterval(drawBall, 10);
+    </script>
+</body>
+</html>
